@@ -73,4 +73,21 @@ func read_NtpServerCoreType(core Core) {
 		log.Println("NtpServerMacValue: NA")
 	}
 
+	// vlan
+	if read_reg(core.BaseAddrLReg+ntpServer.ConfigVlanReg, &temp_data) == 0 {
+		if (temp_data & 0x00010000) == 0 {
+			log.Println("NtpServerVlanEnable: False")
+		} else {
+			log.Println("NtpServerVlanEnable: True")
+		}
+
+		temp_data &= 0x0000FFFF
+		log.Println("NtpServerVlanValue: ", fmt.Sprintf("0x%08x", temp_data))
+
+	} else {
+		log.Println("NtpServerVlanEnable: False")
+		log.Println("NtpServerVlanValue: NA")
+
+	}
+
 }
