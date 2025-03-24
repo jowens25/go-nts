@@ -52,7 +52,7 @@ func read_core_addresses() int {
 		}
 
 		temp_config.Cores = append(temp_config.Cores, temp_core)
-		log.Println(temp_config)
+		//log.Println(temp_config)
 		read_core_parameters(temp_core)
 	}
 

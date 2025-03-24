@@ -2,7 +2,7 @@ package main
 
 import "log"
 
-func read_ClkClockCoreType_values(core Core) {
+func read_ClkClockCoreType(core Core) {
 
 	var clock = Clock{
 

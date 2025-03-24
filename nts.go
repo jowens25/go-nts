@@ -16,10 +16,10 @@ func main() {
 	//open_port("/dev/ttyUSB0")
 
 	////detect_baudrate()
-	//var addr uint64 = 0xB0020000
-	//var data uint64 = 0x00000001
+	var addr int64 = 0xB0020000
+	var data int64 = 0x00000001
 	//connect()
-	//write_reg(addr, &data)
+	write_reg(addr, &data)
 	read_core_addresses()
 	var nFlag = flag.Int("n", 1234, "help message for flag n")
 	log.Println(&nFlag)
