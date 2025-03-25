@@ -1,28 +1,33 @@
 package main
 
-import (
-	"flag"
-	"log"
-)
-
 // comes from user config device 0 - /dev/ttyUSB0
 var FileDescriptor string = "/dev/ttyUSB0"
 var BaudRates = []int{2000000, 1000000, 500000, 460800, 115200}
 var BaudRate = 1000000
 var IsOpen bool = false
 
-func main() {
+// nts -l
+// for var in fpga:
+//     read var
+//     display var
 
+// nts -set ntp ip "10.1.10.1"
+// parse command
+// write fpga
+// show reponse
+
+func main() {
+	cli()
 	//open_port("/dev/ttyUSB0")
 
 	////detect_baudrate()
-	var addr int64 = 0xB0020000
-	var data int64 = 0x00000001
+	//var addr int64 = 0xB0020000
+	//var data int64 = 0x00000001
 	//connect()
-	write_reg(addr, &data)
-	read_core_addresses()
-	var nFlag = flag.Int("n", 1234, "help message for flag n")
-	log.Println(&nFlag)
+	//write_reg(addr, &data)
+	//read_core_config()
+	//var nFlag = flag.Int("n", 1234, "help message for flag n")
+	//log.Println(&nFlag)
 }
 
 //func open_port(file_descriptor string) int {

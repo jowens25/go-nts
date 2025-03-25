@@ -1,8 +1,11 @@
 package main
 
-import "log"
+import (
+	"fmt"
+	"log"
+)
 
-func read_core_addresses() int {
+func read_core_config() int {
 
 	var temp_data int64 = 0x00000000
 
@@ -52,7 +55,9 @@ func read_core_addresses() int {
 		}
 
 		temp_config.Cores = append(temp_config.Cores, temp_core)
-		//log.Println(temp_config)
+
+		log.Println(fmt.Sprintf("low 0x%08x", temp_core.BaseAddrLReg), fmt.Sprintf(" high 0x%08x", temp_core.BaseAddrHReg), " ", temp_core, " ", "Core type: ", get_name(temp_core.CoreType))
+
 		read_core_parameters(temp_core)
 	}
 

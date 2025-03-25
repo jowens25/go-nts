@@ -5,114 +5,113 @@ import (
 )
 
 func read_core_parameters(core Core) {
-	log.Println(core)
+
 	switch core.CoreType {
 
 	case types.ConfSlaveCoreType:
-		log.Println("We have a core type: ConfSlaveCoreType")
+		log.Print("Core type: ConfSlaveCoreType")
 
 	case types.ClkClockCoreType:
-		log.Println("We have a core type: ClkClockCoreType")
 		read_ClkClockCoreType(core)
-		/*
-			case types.ClkSignalGeneratorCoreType:
-				log.Println("We have a core type: ClkSignalGeneratorCoreType")
 
-			case types.ClkSignalTimestamperCoreType:
-				log.Println("We have a core type: ClkSignalTimestamperCoreType")
+	case types.ClkSignalGeneratorCoreType:
+		log.Print("Core type: ClkSignalGeneratorCoreType")
 
-			case types.IrigSlaveCoreType:
-				log.Println("We have a core type: IrigSlaveCoreType")
+	case types.ClkSignalTimestamperCoreType:
+		log.Print("Core type: ClkSignalTimestamperCoreType")
 
-			case types.IrigMasterCoreType:
-				log.Println("We have a core type: IrigMasterCoreType")
+	case types.IrigSlaveCoreType:
+		log.Print("Core type: IrigSlaveCoreType")
 
-			case types.PpsSlaveCoreType:
-				log.Println("We have a core type: PpsSlaveCoreType")
+	case types.IrigMasterCoreType:
+		log.Print("Core type: IrigMasterCoreType")
 
-			case types.PpsMasterCoreType:
-				log.Println("We have a core type: PpsMasterCoreType")
+	case types.PpsSlaveCoreType:
+		log.Print("Core type: PpsSlaveCoreType")
 
-			case types.PtpOrdinaryClockCoreType:
-				log.Println("We have a core type: PtpOrdinaryClockCoreType")
+	case types.PpsMasterCoreType:
+		log.Print("Core type: PpsMasterCoreType")
 
-			case types.PtpTransparentClockCoreType:
-				log.Println("We have a core type: PtpTransparentClockCoreType")
+	case types.PtpOrdinaryClockCoreType:
+		log.Print("Core type: PtpOrdinaryClockCoreType")
 
-			case types.PtpHybridClockCoreType:
-				log.Println("We have a core type: PtpHybridClockCoreType")
+	case types.PtpTransparentClockCoreType:
+		log.Print("Core type: PtpTransparentClockCoreType")
 
-			case types.RedHsrPrpCoreType:
-				log.Println("We have a core type: RedHsrPrpCoreType")
+	case types.PtpHybridClockCoreType:
+		log.Print("Core type: PtpHybridClockCoreType")
 
-			case types.RtcSlaveCoreType:
-				log.Println("We have a core type: RtcSlaveCoreType")
+	case types.RedHsrPrpCoreType:
+		log.Print("Core type: RedHsrPrpCoreType")
 
-			case types.RtcMasterCoreType:
-				log.Println("We have a core type: RtcMasterCoreType")
+	case types.RtcSlaveCoreType:
+		log.Print("Core type: RtcSlaveCoreType")
 
-			case types.TodSlaveCoreType:
-				log.Println("We have a core type: TodSlaveCoreType")
+	case types.RtcMasterCoreType:
+		log.Print("Core type: RtcMasterCoreType")
 
-			case types.TodMasterCoreType:
-				log.Println("We have a core type: TodMasterCoreType")
+	case types.TodSlaveCoreType:
+		log.Print("Core type: TodSlaveCoreType ")
 
-			case types.TapSlaveCoreType:
-				log.Println("We have a core type: TapSlaveCoreType")
+	case types.TodMasterCoreType:
+		log.Print("Core type: TodMasterCoreType")
 
-			case types.DcfSlaveCoreType:
-				log.Println("We have a core type: DcfSlaveCoreType")
+	case types.TapSlaveCoreType:
+		log.Print("Core type: TapSlaveCoreType")
 
-			case types.DcfMasterCoreType:
-				log.Println("We have a core type: DcfMasterCoreType")
+	case types.DcfSlaveCoreType:
+		log.Print("Core type: DcfSlaveCoreType")
 
-			case types.RedTsnCoreType:
-				log.Println("We have a core type: RedTsnCoreType")
+	case types.DcfMasterCoreType:
+		log.Print("Core type: DcfMasterCoreType")
 
-			case types.TsnIicCoreType:
-				log.Println("We have a core type: TsnIicCoreType")
-		*/
+	case types.RedTsnCoreType:
+		log.Print("Core type: RedTsnCoreType")
+
+	case types.TsnIicCoreType:
+		log.Print("Core type: TsnIicCoreType")
+
 	case types.NtpServerCoreType:
-		log.Println("We have a core type: NtpServerCoreType")
 		read_NtpServerCoreType(core)
-		/*		case types.NtpClientCoreType:
-					log.Println("We have a core type: NtpClientCoreType")
+	case types.NtpClientCoreType:
+		log.Print("Core type: NtpClientCoreType")
 
-				case types.ClkFrequencyGeneratorCoreType:
-					log.Println("We have a core type: ClkFrequencyGeneratorCoreType")
+	case types.ClkFrequencyGeneratorCoreType:
+		log.Print("Core type: ClkFrequencyGeneratorCoreType")
 
-				case types.SynceNodeCoreType:
-					log.Println("We have a core type: SynceNodeCoreType")
+	case types.SynceNodeCoreType:
+		log.Print("Core type: SynceNodeCoreType")
 
-				case types.PpsClkToPpsCoreType:
-					log.Println("We have a core type: PpsClkToPpsCoreType")
+	case types.PpsClkToPpsCoreType:
+		log.Print("Core type: PpsClkToPpsCoreType")
 
-				case types.PtpServerCoreType:
-					log.Println("We have a core type: PtpServerCoreType")
+	case types.PtpServerCoreType:
+		log.Print("Core type: PtpServerCoreType")
 
-				case types.PtpClientCoreType:
-					log.Println("We have a core type: PtpClientCoreType")
+	case types.PtpClientCoreType:
+		log.Print("Core type: PtpClientCoreType")
 
-				case types.PhyConfigurationCoreType:
-					log.Println("We have a core type: PhyConfigurationCoreType")
+	case types.PhyConfigurationCoreType:
+		log.Print("Core type: PhyConfigurationCoreType")
 
-				case types.I2cConfigurationCoreType:
-					log.Println("We have a core type: I2cConfigurationCoreType")
+	case types.I2cConfigurationCoreType:
+		log.Print("Core type: I2cConfigurationCoreType")
 
-				case types.IoConfigurationCoreType:
-					log.Println("We have a core type: IoConfigurationCoreType")
+	case types.IoConfigurationCoreType:
+		log.Print("Core type: IoConfigurationCoreType")
 
-				case types.EthernetTestplatformType:
-					log.Println("We have a core type: EthernetTestplatformType")
+	case types.EthernetTestplatformType:
+		log.Print("Core type: EthernetTestplatformType")
 
-				case types.MinSwitchCoreType:
-					log.Println("We have a core type: MinSwitchCoreType")
+	case types.MinSwitchCoreType:
+		log.Print("Core type: MinSwitchCoreType")
 
-				case types.ConfExtCoreType:
-					log.Println("We have a core type: ConfExtCoreType")
-		*/
+	case types.ConfExtCoreType:
+		log.Print("Core type: ConfExtCoreType")
+
 	default:
-		log.Println("Core not found error, type: ", core.CoreType)
+		log.Print("Core not found error, type: ", core.CoreType)
+
 	}
 
 }

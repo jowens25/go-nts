@@ -21,4 +21,25 @@ type NtpServer struct {
 	ConfigReferenceIdReg int64
 	UtcInfoControlReg    int64
 	UtcInfoReg           int64
+
+	ControlVal           string
+	StatusVal            string
+	VersionVal           string
+	CountControlVal      string
+	CountReqVal          string
+	CountRespVal         string
+	CountReqDroppedVal   string
+	CountBroadcastVal    string
+	ConfigControlVal     string
+	ConfigModeVal        string
+	ConfigVlanVal        string
+	ConfigMac1Val        string
+	ConfigMac2Val        string
+	ConfigIpVal          string
+	ConfigIpv61Val       string
+	ConfigIpv62Val       string
+	ConfigIpv63Val       string
+	ConfigReferenceIdVal string
+	UtcInfoControlVal    string
+	UtcInfoVal           string
 }

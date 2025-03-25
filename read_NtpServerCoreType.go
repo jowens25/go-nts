@@ -29,6 +29,27 @@ func read_NtpServerCoreType(core Core) {
 		ConfigReferenceIdReg: 0x000000A4,
 		UtcInfoControlReg:    0x00000100,
 		UtcInfoReg:           0x00000104,
+
+		ControlVal:           "",
+		StatusVal:            "",
+		VersionVal:           "",
+		CountControlVal:      "",
+		CountReqVal:          "",
+		CountRespVal:         "",
+		CountReqDroppedVal:   "",
+		CountBroadcastVal:    "",
+		ConfigControlVal:     "",
+		ConfigModeVal:        "",
+		ConfigVlanVal:        "",
+		ConfigMac1Val:        "",
+		ConfigMac2Val:        "",
+		ConfigIpVal:          "",
+		ConfigIpv61Val:       "",
+		ConfigIpv62Val:       "",
+		ConfigIpv63Val:       "",
+		ConfigReferenceIdVal: "",
+		UtcInfoControlVal:    "",
+		UtcInfoVal:           "",
 	}
 
 	var temp_data int64 = 0x00000000
@@ -88,6 +109,62 @@ func read_NtpServerCoreType(core Core) {
 		log.Println("NtpServerVlanEnable: False")
 		log.Println("NtpServerVlanValue: NA")
 
+	}
+
+	// mode & server config
+	if read_reg(core.BaseAddrLReg+ntpServer.ConfigModeReg, &temp_data) == 0 {
+		if ((temp_data >> 0) & 0x00000003) == 1 {
+			log.Println("NtpServerIpModeValue: IPv4")
+		} else if ((temp_data >> 0) & 0x00000003) == 2 {
+			log.Println("NtpServerIpModeValue: IPv6")
+		} else {
+			log.Println("NtpServerIpModeValue: NA")
+		}
+
+		if (temp_data & 0x00000010) == 0 {
+			log.Println("NtpServerUnicastMode: false")
+		} else {
+			log.Println("NtpServerUnicastMode: true")
+		}
+
+		if (temp_data & 0x00000020) == 0 {
+			log.Println("NtpServerMulticastMode: false")
+		} else {
+			log.Println("NtpServerMulticastMode: true")
+		}
+
+		if (temp_data & 0x00000040) == 0 {
+			log.Println("NtpServerBroadcastMode: false")
+		} else {
+			log.Println("NtpServerBroadcastMode: true")
+		}
+
+		log.Println("NtpServerPrecisionValue: ", int8(((temp_data >> 8) & 0x000000FF)))
+		log.Println("NtpServerPollIntervalValue: ", ((temp_data >> 16) & 0x000000FF))
+		log.Println("NtpServerStratumValue ", ((temp_data >> 24) & 0x000000FF))
+
+	} else {
+		log.Println("NtpServerIpModeValue: NA")
+		log.Println("NtpServerUnicastMode: false")
+		log.Println("NtpServerMulticastMode: false")
+		log.Println("NtpServerBroadcastMode: false")
+
+		log.Println("NtpServerPrecisionValue: ", "NA")
+		log.Println("NtpServerPollIntervalValue: ", "NA")
+		log.Println("NtpServerStratumValue ", "NA")
+
+	}
+
+	// reference id // no ref on UI??
+	if read_reg(core.BaseAddrLReg+ntpServer.ConfigReferenceIdReg, &temp_data) == 0 {
+		var temp_string []byte
+		temp_string = append(temp_string, byte(((temp_data >> 24) & 0x000000FF)))
+		temp_string = append(temp_string, byte(((temp_data >> 16) & 0x000000FF)))
+		temp_string = append(temp_string, byte(((temp_data >> 8) & 0x000000FF)))
+		temp_string = append(temp_string, byte(((temp_data >> 0) & 0x000000FF)))
+		log.Println("NtpServerReferenceIdValue: ", fmt.Sprintf("0x%08x", temp_string)) // TODO
+	} else {
+		log.Println("NtpServerReferenceIdValue: NA")
 	}
 
 }

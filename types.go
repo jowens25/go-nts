@@ -37,6 +37,119 @@ type Types struct {
 	ConfExtCoreType               int64
 }
 
+func get_name(core_type int64) string {
+
+	switch core_type {
+
+	case types.ConfSlaveCoreType:
+		return "ConfSlaveCoreType"
+
+	case types.ClkClockCoreType:
+		return "ClkClockCoreType"
+
+	case types.ClkSignalGeneratorCoreType:
+		return "ClkSignalGeneratorCoreType"
+
+	case types.ClkSignalTimestamperCoreType:
+		return "ClkSignalTimestamperCoreType"
+
+	case types.IrigSlaveCoreType:
+		return "IrigSlaveCoreType"
+
+	case types.IrigMasterCoreType:
+		return "IrigMasterCoreType"
+
+	case types.PpsSlaveCoreType:
+		return "PpsSlaveCoreType"
+
+	case types.PpsMasterCoreType:
+		return "PpsMasterCoreType"
+
+	case types.PtpOrdinaryClockCoreType:
+		return "PtpOrdinaryClockCoreType"
+
+	case types.PtpTransparentClockCoreType:
+		return "PtpTransparentClockCoreType"
+
+	case types.PtpHybridClockCoreType:
+		return "PtpHybridClockCoreType"
+
+	case types.RedHsrPrpCoreType:
+		return "RedHsrPrpCoreType"
+
+	case types.RtcSlaveCoreType:
+		return "RtcSlaveCoreType"
+
+	case types.RtcMasterCoreType:
+		return "RtcMasterCoreType"
+
+	case types.TodSlaveCoreType:
+		return "TodSlaveCoreType"
+
+	case types.TodMasterCoreType:
+		return "TodMasterCoreType"
+
+	case types.TapSlaveCoreType:
+		return "TapSlaveCoreType"
+
+	case types.DcfSlaveCoreType:
+		return "DcfSlaveCoreType"
+
+	case types.DcfMasterCoreType:
+		return "DcfMasterCoreType"
+
+	case types.RedTsnCoreType:
+		return "RedTsnCoreType"
+
+	case types.TsnIicCoreType:
+		return "TsnIicCoreType"
+
+	case types.NtpServerCoreType:
+		return "NtpServerCoreType"
+
+	case types.NtpClientCoreType:
+		return "NtpClientCoreType"
+
+	case types.ClkFrequencyGeneratorCoreType:
+		return "ClkFrequencyGeneratorCoreType"
+
+	case types.SynceNodeCoreType:
+		return "SynceNodeCoreType"
+
+	case types.PpsClkToPpsCoreType:
+		return "PpsClkToPpsCoreType"
+
+	case types.PtpServerCoreType:
+		return "PtpServerCoreType"
+
+	case types.PtpClientCoreType:
+		return "PtpClientCoreType"
+
+	case types.PhyConfigurationCoreType:
+		return "PhyConfigurationCoreType"
+
+	case types.I2cConfigurationCoreType:
+		return "I2cConfigurationCoreType"
+
+	case types.IoConfigurationCoreType:
+		return "IoConfigurationCoreType"
+
+	case types.EthernetTestplatformType:
+		return "EthernetTestplatformType"
+
+	case types.MinSwitchCoreType:
+		return "MinSwitchCoreType"
+
+	case types.ConfExtCoreType:
+		return "ConfExtCoreType"
+
+	default:
+		return "Core not found error type: " + string(core_type)
+
+	}
+
+}
+
 var types = Types{
 	ConfSlaveCoreType:             1,
 	ClkClockCoreType:              2,
