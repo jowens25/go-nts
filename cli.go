@@ -6,6 +6,9 @@ import (
 	"os"
 )
 
+var en_data int64 = 0x00000001
+var disen_data int64 = 0x00000000
+
 func cli() {
 
 	// define top level commands
@@ -24,9 +27,9 @@ func cli() {
 	IrqMaskReg := core.Int64("IrqMaskReg", 0x0000000C, "interrupt mask")
 	// ntp
 	ntp := flag.NewFlagSet("ntp", flag.ExitOnError)
-	showNtp := ntp.Bool("ls", false, "show the ntp config")
-	ntpEnable := ntp.Bool("enable", false, "enabled ntp server")
-	ntpMac := ntp.String("mac", "00:00:00:00:00:00", "ntp server mac address")
+	ntp.Bool("ls", false, "show the ntp config")
+	ntp.Bool("enable", false, "enabled ntp server")
+	ntp.String("mac", "00:00:00:00:00:00", "ntp server mac address")
 
 	switch os.Args[1] {
 
@@ -47,18 +50,37 @@ func cli() {
 	case "ntp":
 		ntp.Parse(os.Args[2:])
 
-		if !*showNtp {
-			log.Println("made these changes to ntp core")
-			ntp.Visit(func(f *flag.Flag) { log.Println("updated: ", f.Name) })
-		}
+		ntp.Visit(func(f *flag.Flag) {
+			parseNtpParameters(f.Name, f.Value.String())
+		})
 
-		log.Println("NTP Enabled: ", *ntpEnable)
-		log.Println("NTP Mac Addr: ", *ntpMac)
+		//read_reg(0xB0020000, &en_data)
+
+		//write_reg(0xB0020000, &disen_data)
 
 	default:
 		log.Println("Please enter a valid command")
 
 	}
+
+}
+
+func parseNtpParameters(name string, value string) {
+	if value == "true" {
+		write_reg(0xB0020000, &en_data)
+
+	} else if value == "false" {
+		write_reg(0xB0020000, &disen_data)
+	}
+
+	if name == "ls" {
+		log.Println(value)
+		log.Println(read_reg(0xB0020000, &disen_data))
+
+		log.Println(disen_data)
+	}
+
+	// enable ntp
 
 }
 

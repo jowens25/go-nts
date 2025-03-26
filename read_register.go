@@ -65,7 +65,7 @@ func read_reg(addr int64, data *int64) int {
 	}
 	read_data = read_data[:n] // chop off
 	read_string := string(read_data)
-	//log.Print("VERBOSE read: ", string(read_data))
+	log.Print("VERBOSE read: ", string(read_data))
 	//fmt.Printf("read: ", read_data)
 
 	checksum = calculate_checksum(read_data)
