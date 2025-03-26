@@ -17,7 +17,7 @@ var IsOpen bool = false
 // show reponse
 
 func main() {
-	cli()
+	//cli()
 	//open_port("/dev/ttyUSB0")
 
 	////detect_baudrate()
@@ -25,7 +25,7 @@ func main() {
 	//var data int64 = 0x00000001
 	//connect()
 	//write_reg(addr, &data)
-	//read_core_config()
+	read_core_config()
 	//var nFlag = flag.Int("n", 1234, "help message for flag n")
 	//log.Println(&nFlag)
 }
