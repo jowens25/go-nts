@@ -1,6 +1,9 @@
 package main
 
-import "log"
+import (
+	"flag"
+	"fmt"
+)
 
 type Core struct {
 	CoreType       int64
@@ -10,33 +13,35 @@ type Core struct {
 	IrqMaskReg     int64
 }
 
-type Config struct {
+type CoreConfig struct {
 	BlockSize       int64
 	TypeInstanceReg int64
 	BaseAddrLReg    int64
 	BaseAddrHReg    int64
 	IrqMaskReg      int64
-	Cores           []Core
+	flags           *flag.FlagSet
 }
 
-var temp_config = Config{
+var coreConfig = CoreConfig{
 	BlockSize:       16,
 	TypeInstanceReg: 0x00000000,
 	BaseAddrLReg:    0x00000004,
 	BaseAddrHReg:    0x00000008,
 	IrqMaskReg:      0x0000000C,
-	Cores:           make([]Core, 0, 64),
+
+	flags: flag.NewFlagSet("coreConfig", flag.ExitOnError),
+}
+
+func init() {
+	coreConfig.flags.Bool("ls", false, "`list` core configuration")
 }
 
 func parseCoreConfigProperties(name string, value string) {
 
-	switch name {
-	case "blocksize":
-		log.Println("block size case")
-
-	default:
-		log.Println("core config command not known: try -ls")
-
-	}
+	fmt.Println("BlockSize", coreConfig.BlockSize)
+	fmt.Println("TypeInstanceReg", coreConfig.TypeInstanceReg)
+	fmt.Println("BaseAddrLReg", coreConfig.BaseAddrLReg)
+	fmt.Println("BaseAddrHReg", coreConfig.BaseAddrHReg)
+	fmt.Println("IrqMaskReg", coreConfig.IrqMaskReg)
 
 }

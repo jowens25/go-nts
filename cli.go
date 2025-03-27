@@ -6,30 +6,12 @@ import (
 	"os"
 )
 
-var coreConfig *flag.FlagSet = flag.NewFlagSet("core", flag.ExitOnError)
-
 func cli() {
-
-	// define top level commands
-	// if the flag is empty or false assume read
-	// if the flag is not empty or true assume write
-
-	// define module level commands
-	// core
-	coreConfig.Bool("ls", false, "show the core")
-	coreConfig.Int64("blocksize", 16, "block size")
-	coreConfig.Int64("type", 0x00000000, "core type")
-	coreConfig.Int64("BaseAddrLReg", 0x00000004, "address low")
-	coreConfig.Int64("BaseAddrHReg", 0x00000008, "address high")
-	coreConfig.Int64("IrqMaskReg", 0x0000000C, "interrupt mask")
-	// ntp
 
 	switch os.Args[1] {
 
-	case "status":
-		getStatus()
 	case "core":
-		parseConfig(coreConfig)
+		parseConfig(coreConfig.flags)
 	case "ntp":
 		parseConfig(ntpServer.flags)
 
@@ -41,15 +23,17 @@ func cli() {
 }
 
 func parseConfig(core *flag.FlagSet) {
+
 	core.Parse(os.Args[2:])
+
 	switch core {
-	case coreConfig:
+
+	case coreConfig.flags:
 		core.Visit(func(f *flag.Flag) {
 			parseCoreConfigProperties(f.Name, f.Value.String())
 
 		})
 	case ntpServer.flags:
-
 		core.Visit(func(f *flag.Flag) {
 			parseNtpProperties(f.Name, f.Value.String())
 
@@ -60,8 +44,4 @@ func parseConfig(core *flag.FlagSet) {
 
 	}
 
-}
-
-func getStatus() {
-	log.Println("THIS IS THE STATUS!!")
 }

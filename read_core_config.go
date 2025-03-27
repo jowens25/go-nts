@@ -12,7 +12,7 @@ func read_core_config(coreType int64, temp_core *Core) int {
 	for i := int64(0); i < 256; i++ {
 		//temp_core := Core{}
 
-		type_addr := (0x00000000 + ((i * temp_config.BlockSize) + temp_config.TypeInstanceReg))
+		type_addr := (0x00000000 + ((i * coreConfig.BlockSize) + coreConfig.TypeInstanceReg))
 		//log.Println("i: ", i)
 		if read_reg(type_addr, &temp_data) == 0 {
 			//log.Println(temp_data)
@@ -33,21 +33,21 @@ func read_core_config(coreType int64, temp_core *Core) int {
 			log.Fatal("Error in reading modules config")
 		}
 
-		low_addr := (0x00000000 + ((i * temp_config.BlockSize) + temp_config.BaseAddrLReg))
+		low_addr := (0x00000000 + ((i * coreConfig.BlockSize) + coreConfig.BaseAddrLReg))
 		if read_reg(low_addr, &temp_data) == 0 {
 			temp_core.BaseAddrLReg = temp_data
 		} else {
 			break
 		}
 
-		high_addr := (0x00000000 + ((i * temp_config.BlockSize) + temp_config.BaseAddrHReg))
+		high_addr := (0x00000000 + ((i * coreConfig.BlockSize) + coreConfig.BaseAddrHReg))
 		if read_reg(high_addr, &temp_data) == 0 {
 			temp_core.BaseAddrHReg = temp_data
 		} else {
 			break
 		}
 
-		interrupt_mask := (0x00000000 + ((i * temp_config.BlockSize) + temp_config.IrqMaskReg))
+		interrupt_mask := (0x00000000 + ((i * coreConfig.BlockSize) + coreConfig.IrqMaskReg))
 		if read_reg(interrupt_mask, &temp_data) == 0 {
 			temp_core.IrqMaskReg = temp_data
 		} else {
@@ -58,7 +58,7 @@ func read_core_config(coreType int64, temp_core *Core) int {
 		if coreType == temp_core.CoreType {
 			break
 		}
-		temp_config.Cores = append(temp_config.Cores, *temp_core)
+		//coreConfig.Cores = append(coreConfig.Cores, *temp_core) ?? not sure theres a good reason for this?
 
 		// /read_core_parameters(temp_core)
 	}
