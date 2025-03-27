@@ -59,7 +59,7 @@ func write_reg(addr int64, data *int64) int {
 	read_data = read_data[:n]
 	port.Close()
 	read_string := string(read_data)
-	//log.Print("read: ", string(read_data))
+	log.Print("read: ", string(read_data))
 	//fmt.Printf("read: % #x \n", read_data)
 
 	checksum = calculate_checksum(read_data)

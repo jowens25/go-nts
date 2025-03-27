@@ -16,7 +16,10 @@ func read_reg(addr int64, data *int64) int {
 	read_data := make([]byte, 32)
 	temp_data := make([]byte, 0, 32)
 
-	//log.Println("VERBOSE: Read Register")
+	if verbose {
+		log.Println("VERBOSE: Read Register")
+
+	}
 
 	mode := &serial.Mode{
 		BaudRate: BaudRate,
@@ -33,14 +36,15 @@ func read_reg(addr int64, data *int64) int {
 	write_data = append(write_data, "$RC,"...)
 	hexAddr := fmt.Sprintf("0x%08x", addr)
 	write_data = append(write_data, hexAddr...)
-
 	checksum := calculate_checksum(write_data)
 	write_data = append(write_data, '*')
 	write_data = append(write_data, checksum...)
 	write_data = append(write_data, '\r')
 	write_data = append(write_data, '\n')
 
-	//log.Print("write: ", string(write_data))
+	if verbose {
+		fmt.Print("VERBOSE: Read Command: ", string(write_data))
+	}
 	//fmt.Printf("% #x ", write_data)
 
 	n, err := port.Write(write_data)
@@ -65,7 +69,10 @@ func read_reg(addr int64, data *int64) int {
 	}
 	read_data = read_data[:n] // chop off
 	read_string := string(read_data)
-	log.Print("VERBOSE read: ", string(read_data))
+
+	if verbose {
+		log.Print("VERBOSE: Read Response: ", string(read_data))
+	}
 	//fmt.Printf("read: ", read_data)
 
 	checksum = calculate_checksum(read_data)

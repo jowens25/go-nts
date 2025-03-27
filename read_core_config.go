@@ -5,12 +5,12 @@ import (
 	"log"
 )
 
-func read_core_config() int {
+func read_core_config(coreType int64, temp_core *Core) int {
 
 	var temp_data int64 = 0x00000000
 
 	for i := int64(0); i < 256; i++ {
-		temp_core := Core{}
+		//temp_core := Core{}
 
 		type_addr := (0x00000000 + ((i * temp_config.BlockSize) + temp_config.TypeInstanceReg))
 		//log.Println("i: ", i)
@@ -54,11 +54,13 @@ func read_core_config() int {
 			break
 		}
 
-		temp_config.Cores = append(temp_config.Cores, temp_core)
-
 		log.Println(fmt.Sprintf("low 0x%08x", temp_core.BaseAddrLReg), fmt.Sprintf(" high 0x%08x", temp_core.BaseAddrHReg), " ", temp_core, " ", "Core type: ", get_name(temp_core.CoreType))
+		if coreType == temp_core.CoreType {
+			break
+		}
+		temp_config.Cores = append(temp_config.Cores, *temp_core)
 
-		read_core_parameters(temp_core)
+		// /read_core_parameters(temp_core)
 	}
 
 	return 0
