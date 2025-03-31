@@ -9,7 +9,9 @@ import (
 )
 
 func connect() int {
-	log.Println("Serial Connect")
+	if verbose {
+		log.Println("VERBOSE: Serial Connect")
+	}
 
 	mode := &serial.Mode{
 		BaudRate: BaudRate,
@@ -32,7 +34,9 @@ func connect() int {
 	write_data = append(write_data, '\r')
 	write_data = append(write_data, '\n')
 
-	log.Println("writing: ", string(write_data))
+	if verbose {
+		log.Println("writing: ", string(write_data))
+	}
 
 	n, err := port.Write(write_data)
 	if err != nil {
@@ -50,7 +54,10 @@ func connect() int {
 
 	port.Close()
 	read_string := string(read_data)
-	log.Printf("received: %v", read_string)
+
+	if verbose {
+		log.Printf("received: %v", read_string)
+	}
 
 	// check response
 	if !strings.HasPrefix(read_string, "$CR") {

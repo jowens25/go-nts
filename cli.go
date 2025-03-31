@@ -2,46 +2,58 @@ package main
 
 import (
 	"flag"
-	"log"
+	"fmt"
 	"os"
 )
 
 func cli() {
 
-	switch os.Args[1] {
+	if len(os.Args) == 1 {
+		parseRootCmdNoFlags()
 
-	case "core":
-		parseConfig(coreConfig.flags)
-	case "ntp":
-		parseConfig(ntpServer.flags)
-
-	default:
-		log.Println("Please enter a valid command")
-
+	} else {
+		parseCommands()
 	}
 
 }
 
-func parseConfig(core *flag.FlagSet) {
+func parseRootCmdNoFlags() {
+	fmt.Println("root command without flags....")
+	flag.Parse()
+	flag.PrintDefaults()
 
-	core.Parse(os.Args[2:])
+}
 
-	switch core {
+func parseCommands() {
+	switch os.Args[1] {
 
-	case coreConfig.flags:
-		core.Visit(func(f *flag.Flag) {
+	case "connect":
+
+		if connect() == 0 {
+			fmt.Println("connected")
+		} else {
+			fmt.Println("not connected")
+		}
+
+	case "core":
+		coreConfig.cmd.Parse(os.Args[2:])
+
+		coreConfig.cmd.Visit(func(f *flag.Flag) {
 			parseCoreConfigProperties(f.Name, f.Value.String())
-
 		})
-	case ntpServer.flags:
-		core.Visit(func(f *flag.Flag) {
-			parseNtpProperties(f.Name, f.Value.String())
 
+	case "ntp":
+		ntpServer.Commands.Parse(os.Args[2:])
+		ntpServer.Commands.Visit(func(f *flag.Flag) {
+			parseNtpFlags(f.Name, f.Value.String())
 		})
+
+	case "help":
+		fmt.Println("Here is how to use the Novus Time Server Configuration Tool: ")
 
 	default:
-		log.Println("Core not found? ")
+		flag.Parse()
 
+		fmt.Println("root command with flags")
 	}
-
 }

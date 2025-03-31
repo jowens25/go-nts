@@ -5,7 +5,7 @@ import (
 	"log"
 )
 
-func read_core_config(coreType int64, temp_core *Core) int {
+func readCoreConfig(coreType int64, temp_core *Core) int {
 
 	var temp_data int64 = 0x00000000
 
@@ -54,8 +54,11 @@ func read_core_config(coreType int64, temp_core *Core) int {
 			break
 		}
 
-		log.Println(fmt.Sprintf("low 0x%08x", temp_core.BaseAddrLReg), fmt.Sprintf(" high 0x%08x", temp_core.BaseAddrHReg), " ", temp_core, " ", "Core type: ", get_name(temp_core.CoreType))
+		if verbose {
+			fmt.Println(fmt.Sprintf("low 0x%08x", temp_core.BaseAddrLReg), fmt.Sprintf(" high 0x%08x", temp_core.BaseAddrHReg), " ", temp_core, " ", "Core type: ", get_name(temp_core.CoreType))
+		}
 		if coreType == temp_core.CoreType {
+			fmt.Println(fmt.Sprintf("low 0x%08x", temp_core.BaseAddrLReg), fmt.Sprintf(" high 0x%08x", temp_core.BaseAddrHReg), " ", temp_core, " ", "Core type: ", get_name(temp_core.CoreType))
 			break
 		}
 		//coreConfig.Cores = append(coreConfig.Cores, *temp_core) ?? not sure theres a good reason for this?

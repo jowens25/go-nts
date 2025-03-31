@@ -19,7 +19,7 @@ type CoreConfig struct {
 	BaseAddrLReg    int64
 	BaseAddrHReg    int64
 	IrqMaskReg      int64
-	flags           *flag.FlagSet
+	cmd             *flag.FlagSet
 }
 
 var coreConfig = CoreConfig{
@@ -29,11 +29,11 @@ var coreConfig = CoreConfig{
 	BaseAddrHReg:    0x00000008,
 	IrqMaskReg:      0x0000000C,
 
-	flags: flag.NewFlagSet("coreConfig", flag.ExitOnError),
+	cmd: flag.NewFlagSet("coreConfig", flag.ExitOnError),
 }
 
 func init() {
-	coreConfig.flags.Bool("ls", false, "`list` core configuration")
+	coreConfig.cmd.Bool("ls", false, "`list` core configuration")
 }
 
 func parseCoreConfigProperties(name string, value string) {

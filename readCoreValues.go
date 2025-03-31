@@ -4,7 +4,7 @@ import (
 	"fmt"
 )
 
-func read_core_parameters(core Core) {
+func readCoreValues(core Core) {
 
 	switch core.CoreType {
 
@@ -72,7 +72,7 @@ func read_core_parameters(core Core) {
 		fmt.Print("Core type: TsnIicCoreType")
 
 	case types.NtpServerCoreType:
-		read_NtpServerCoreType(core)
+		readNtpServer(core)
 	case types.NtpClientCoreType:
 		fmt.Print("Core type: NtpClientCoreType")
 
