@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"log"
 )
 
 type ValueSet map[string]any
@@ -132,6 +131,7 @@ func init() {
 
 }
 
+/*
 func parseNtpFlags(name string, value string) {
 
 	switch name {
@@ -162,7 +162,7 @@ func parseNtpFlags(name string, value string) {
 	}
 
 }
-
+*/
 func listNtpServer() {
 	thiscore := Core{}
 	readCoreConfig(types.NtpServerCoreType, &thiscore)
